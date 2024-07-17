@@ -29,4 +29,6 @@ Clean architecture with booking a reservation for food
   - API
   - Contract
 - Domain Layer
-- Data Layer
+  - Domain
+- Infrastructure Layer
+  - Infrastructure
