@@ -11,7 +11,8 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     public string GenerateToken(Guid userId, string email, string name)
     {
         var signingCredentials =
-            new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key v5")),
+            new SigningCredentials(
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key v545asdsada45455454454545")),
                 SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>
