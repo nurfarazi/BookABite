@@ -2,7 +2,7 @@ namespace Domain.Entities;
 
 public class User
 {
-    public int Id { get; set; } = Guid.NewGuid().GetHashCode();
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string? Email { get; set; }
     public string? Name { get; set; }
     public string? Username { get; set; }

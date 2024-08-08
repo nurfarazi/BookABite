@@ -18,7 +18,7 @@ public class AuthenticationService : IAuthenticationService
     public async Task<AuthenticationResult> RegisterAsync(string email, string password, string name)
     {
         // check user exist
-        var user = _userRepository.GetByEmailAsync(email);
+        var user = await _userRepository.GetByEmailAsync(email);
 
         if (user != null) throw new Exception("User already exists");
 
@@ -26,15 +26,17 @@ public class AuthenticationService : IAuthenticationService
         if (await _userRepository.CheckPasswordAsync(email, password)) throw new Exception("Password is not valid");
 
         // create user
-        _userRepository.AddAsync(new User
+        user = new User
         {
             Email = email,
-            Password = password,
-            Name = name
-        });
+            Name = name,
+            Password = password
+        };
+
+        _userRepository.AddAsync(user);
 
         // generate token
-        var token = _jwtTokenGenerator.GenerateToken(Guid.NewGuid(), email, name);
+        var token = _jwtTokenGenerator.GenerateToken(user.Id, email, name);
 
         return await Task.FromResult(new AuthenticationResult
         {
